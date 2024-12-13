@@ -1,0 +1,21 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.8
+    commands:
+      - echo Installing dependencies
+      - pip install -r requirements.txt
+  build:
+    commands:
+      - echo Build phase
+      - python -m unittest discover
+  post_build:
+    commands:
+      - echo Build completed
+      - zip -r application.zip .
+      - aws s3 cp application.zip s3://<YOUR-S3-BUCKET-NAME>/build/
+artifacts:
+  files:
+    - application.zip

@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: ci-cd-artifacts-<YOUR-UNIQUE-ID>
+  CodePipeline:
+    Type: AWS::CodePipeline::Pipeline
+    Properties:
+      RoleArn: <CODEPIPELINE-ROLE-ARN>
+      Stages:
+        - Name: Source
+          Actions:
+            - Name: SourceAction
+              ActionTypeId:
+                Category: Source
+                Owner: AWS
+                Provider: GitHub
+                Version: '1'
+              OutputArtifacts:
+                - Name: SourceArtifact
+              Configuration:
+                RepositoryName: <YOUR-REPO-NAME>
+                BranchName: main
+                OAuthToken: <YOUR-GITHUB-OAUTH-TOKEN>
