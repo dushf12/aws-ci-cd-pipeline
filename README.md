@@ -12,3 +12,4 @@ This project implements a CI/CD pipeline using AWS services like CodePipeline, C
 - S3
 - CloudWatch
 
+![AWS CI-CD-pipeline](ci-cd.png)
